@@ -35,5 +35,8 @@ public class VirtualPage extends AbstractPage {
 	public long getDateLastUsing() {
 		return DateLastUsing;
 	}
+	public void setDAteLastUsing(long time) {
+		DateLastUsing = time;
+	}
 	
 }

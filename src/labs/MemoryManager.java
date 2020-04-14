@@ -53,4 +53,13 @@ public class MemoryManager {
 			System.out.println("Remove Page from RAM:" + lastChangePage.getContent());
 		}
 	}
+	
+	public void WorkPage(int indexPage, String content) {
+		if (RAM.getPages().size() - 1 < indexPage) {
+			return;
+		}
+		
+		RAM.getPages().get(indexPage).setDAteLastUsing(Instant.now().toEpochMilli());
+		RAM.getPages().get(indexPage).setContent(content);
+	}
 }

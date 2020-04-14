@@ -21,7 +21,10 @@ public class Program {
 		
 		manager.AddPageInVirtualMemory(0, "test", true);
 		manager.AddPageInVirtualMemory(3, "content2", true);
+		
+		manager.WorkPage(0, "dasd");
 		manager.AddPageInVirtualMemory(2, "test", false);
+		manager.WorkPage(2, "dafssafasf");
 		manager.AddPageInVirtualMemory(2, "test", false);
 	}
 }
