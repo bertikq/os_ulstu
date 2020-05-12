@@ -4,22 +4,20 @@ import java.io.Console;
 import java.util.ArrayList;
 
 public class FilesManager {
-	private Cluster[][] allClusters;
+	private Cluster[] allClusters;
 	private ArrayList<File> allFiles;
 	private ArrayList<Folder> allFolders;
 	private int SizeClusters;
-	private int[][] monitor; // 0 - серый, 1 - синий, 2- красный
+	private int[] monitor; // 0 - серый, 1 - синий, 2- красный
 	
 	public FilesManager(int sizeClusters) {
 		SizeClusters = sizeClusters; 
-		allClusters = new Cluster[sizeClusters][sizeClusters];
-		monitor = new int[sizeClusters][sizeClusters];
+		allClusters = new Cluster[sizeClusters];
+		monitor = new int[sizeClusters];
 		
 		for (int i = 0; i < SizeClusters; i++) {
-			for (int j = 0; j < SizeClusters; j++) {
-				allClusters[i][j] = null;
-				monitor[i][j] = 0;
-			}
+				allClusters[i] = null;
+				monitor[i] = 0;
 		}
 		allFiles = new ArrayList<File>();
 		allFolders = new ArrayList<Folder>();
@@ -35,32 +33,28 @@ public class FilesManager {
 		File file = new File(parent, curCluster, name);
 		
 		for (int i = 0; i < SizeClusters; i++) {
-			for (int j = 0; j < SizeClusters; j++) {
-				if (allClusters[i][j] == null) {
-					allClusters[i][j] = new Cluster(null, "");
-					curCluster = allClusters[i][j];
-					curCluster.setContent(clusters.get(0).getContent());
-					clusters.remove(0);
-					monitor[i][j] = 1;
-					break;
-				}
+			if (allClusters[i] == null) {
+				allClusters[i] = new Cluster(null, "");
+				curCluster = allClusters[i];
+				curCluster.setContent(clusters.get(0).getContent());
+				clusters.remove(0);
+				monitor[i] = 1;
+				break;
 			}
 		}
 				
 		for (int i = 0; i < SizeClusters; i++) {
-			for (int j = 0; j < SizeClusters; j++) {
-				if (clusters.size() < 1) {
-					break;
-				}
-				
-				if (allClusters[i][j] == null) {
-					allClusters[i][j] = new Cluster(null, "");
-					curCluster.setNextCluster(allClusters[i][j]);
-					curCluster = allClusters[i][j];
-					curCluster.setContent(clusters.get(0).getContent());
-					monitor[i][j] = 1;
-					clusters.remove(0);
-				}
+			if (clusters.size() < 1) {
+				break;
+			}
+			
+			if (allClusters[i] == null) {
+				allClusters[i] = new Cluster(null, "");
+				curCluster.setNextCluster(allClusters[i]);
+				curCluster = allClusters[i];
+				curCluster.setContent(clusters.get(0).getContent());
+				monitor[i] = 1;
+				clusters.remove(0);
 			}
 		}
 		allFiles.add(file);
@@ -101,11 +95,9 @@ public class FilesManager {
 			
 
 			for (int i = 0; i < SizeClusters; i++) {
-				for (int j = 0; j < SizeClusters; j++) {
-					if (cl == allClusters[i][j]) {
-						monitor[i][j] = 0;
-						cl = null;
-					}
+				if (cl == allClusters[i]) {
+					monitor[i] = 0;
+					cl = null;
 				}
 			}
 		}
@@ -130,10 +122,8 @@ public class FilesManager {
 	public void SelectFile(File file) {
 		for (Cluster cl : file.getClusters()) {
 			for (int i = 0; i < SizeClusters; i++) {
-				for (int j = 0; j < SizeClusters; j++) {
-					if (cl == allClusters[i][j]) {
-						monitor[i][j] = 2;
-					}
+				if (cl == allClusters[i]) {
+					monitor[i] = 2;
 				}
 			}
 		}
@@ -141,10 +131,7 @@ public class FilesManager {
 	
 	public void DrawTable() {
 		for (int i = 0; i < SizeClusters; i++) {
-			for (int j = 0; j < SizeClusters; j++) {
-				System.out.print(monitor[i][j] + " ");
-			}
-			System.out.println();
+			System.out.print(monitor[i] + " ");
 		}
 	}
 	
@@ -152,10 +139,8 @@ public class FilesManager {
 	private int getCountFreeClusters() {
 		int freeClusters = 0;
 		for (int i = 0; i < SizeClusters; i++) {
-			for (int j = 0; j < SizeClusters; j++) {
-				if (allClusters[i][j].getNextCluster() == null) {
-					freeClusters++;
-				}
+			if (allClusters[i].getNextCluster() == null) {
+				freeClusters++;
 			}
 		}
 		return freeClusters;
