@@ -1,20 +1,20 @@
 package labs;
 
 public class Cluster {
-	private Cluster mNextCluster;
+	private Cluster nextCluster;
 	private String mContent;
 	
 	public Cluster(Cluster nextCluster, String content) {
-		mNextCluster = nextCluster;
+		this.nextCluster = nextCluster;
 		mContent = content;
 	}
 
 	public Cluster getNextCluster() {
-		return mNextCluster;
+		return nextCluster;
 	}
 
 	public void setNextCluster(Cluster nextCluster) {
-		mNextCluster = nextCluster;
+		this.nextCluster = nextCluster;
 	}
 
 	public String getContent() {

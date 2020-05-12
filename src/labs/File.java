@@ -3,23 +3,31 @@ package labs;
 import java.util.ArrayList;
 
 public class File {
-	private String mName;
-	public Folder mParent;
-	public Cluster mMainCluster;
+	private String name;
+	public Folder parent;
+	public Cluster mainCluster;
 	
+	public Cluster getMainCluster() {
+		return mainCluster;
+	}
+
+	public void setMainCluster(Cluster mainCluster) {
+		this.mainCluster = mainCluster;
+	}
+
 	public File(Folder parent, Cluster mainCluster, String name) {
-		mParent = parent;
-		mMainCluster = mainCluster;
-		mName = name;
+		this.parent = parent;
+		this.mainCluster = mainCluster;
+		this.name = name;
 	}
 	
 	public String getName() {
-		return mName;
+		return name;
 	}
 	
 	public ArrayList<Cluster> getClusters() {
 		ArrayList<Cluster> clusters = new ArrayList<Cluster>();
-		Cluster cur = mMainCluster;
+		Cluster cur = mainCluster;
 		while(cur.getNextCluster() != null) {
 			clusters.add(cur);
 			cur = cur.getNextCluster();
@@ -29,6 +37,6 @@ public class File {
 	}
 	
 	public Folder getParent() {
-		return mParent;
+		return parent;
 	}
 }

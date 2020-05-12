@@ -3,38 +3,38 @@ package labs;
 import java.util.ArrayList;
 
 public class Folder {
-	private String mName;
-	private Folder mParent;
-	private ArrayList<Folder> mChildFolders;
+	private String name;
+	private Folder parent;
+	private ArrayList<Folder> childFolders;
 	
 	public Folder(String name, Folder parent) {
-		mName = name;
-		mParent = parent;
-		mChildFolders = new ArrayList<Folder>();
+		this.name = name;
+		this.parent = parent;
+		childFolders = new ArrayList<Folder>();
 	}
 
-	public String getmName() {
-		return mName;
+	public String getName() {
+		return name;
 	}
 
-	public void setmName(String mName) {
-		this.mName = mName;
+	public void setName(String mName) {
+		this.name = mName;
 	}
 
-	public Folder getmParent() {
-		return mParent;
+	public Folder getParent() {
+		return parent;
 	}
 
-	public void setmParent(Folder mParent) {
-		this.mParent = mParent;
+	public void setParent(Folder mParent) {
+		this.parent = mParent;
 	}
 	
 	public void addFolder(Folder folder) {
-		mChildFolders.add(folder);
+		childFolders.add(folder);
 	}
 	
 	public ArrayList<Folder> getChilds(){
-		return mChildFolders;
+		return childFolders;
 	}
 	
 }
